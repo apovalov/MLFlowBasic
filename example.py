@@ -75,8 +75,11 @@ if __name__ == "__main__":
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
 
-        # For remote server only
-        remote_server_uri = "https://dagshub.com/apovalov/MLFlowBasic.mlflow"
+        # For remote server only (DagsHub)
+        #remote_server_uri = "https://dagshub.com/apovalov/MLFlowBasic.mlflow"
+
+        # For remote server only (AWS)
+        remote_server_uri = "http://ec2-18-141-200-90.ap-southeast-1.compute.amazonaws.com:5000/"
         mlflow.set_tracking_uri(remote_server_uri)
 
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
@@ -90,4 +93,4 @@ if __name__ == "__main__":
             mlflow.sklearn.log_model(
                 lr, "model", registered_model_name="ElasticnetWineModel")
         else:
-            mlflow.sklearn.log_model(lr, "model", signature=signature)
+            mlflow.sklearn.log_model(lr, "model")
